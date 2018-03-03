@@ -44,7 +44,19 @@ for tweet in _my_tl:
 	if _create_date < _period_date:
 		_target_tweet.append(tweet)
 
-print _target_tweet[-1].keys()
+_destroy_url = 'https://api.twitter.com/1.1/statuses/destroy/:id.json'
+
+# destroy target tweet without likes, media
+_delete_count = 0
 for tweet in _target_tweet:
-	if 'media' not in tweet['entities']:
-		print tweet['text']
+	if 'media' not in tweet['entities'] and tweet['favorite_count'] == 0:
+		_destroy_url = 'https://api.twitter.com/1.1/statuses/destroy/' + str(tweet['id']) + '.json'
+		_req = _twitter.post(_destroy_url)
+		print _req.status_code
+		_delete_count += 1
+
+print _delete_count
+
+
+
+
