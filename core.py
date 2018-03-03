@@ -23,11 +23,10 @@ _my_tl = json.loads(_req.text)
 # create all my tweeet list
 _min_id = _my_tl[-1]['id']
 while True:
-
-	_params = {'max_id': _min_id - 1}
+	_params = {'max_id': _min_id - 1, 'count': 200, 'exclude_replies': True}
 	_req = _twitter.get(_url, params = _params)
 	_tmp_tl = json.loads(_req.text)
-	
+
 	if len(_tmp_tl) == 0:
 		break
 
@@ -45,5 +44,7 @@ for tweet in _my_tl:
 	if _create_date < _period_date:
 		_target_tweet.append(tweet)
 
+print _target_tweet[-1].keys()
 for tweet in _target_tweet:
-	print tweet['text']
+	if 'media' not in tweet['entities']:
+		print tweet['text']
