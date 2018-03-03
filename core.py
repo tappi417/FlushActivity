@@ -23,15 +23,15 @@ _my_tl = json.loads(_req.text)
 # create all my tweeet list
 _min_id = _my_tl[-1]['id']
 while True:
-	_params = {'max_id': _min_id - 1, 'count': 200, 'exclude_replies': True}
-	_req = _twitter.get(_url, params = _params)
-	_tmp_tl = json.loads(_req.text)
+    _params = {'max_id': _min_id - 1, 'count': 200, 'exclude_replies': True}
+    _req = _twitter.get(_url, params = _params)
+    _tmp_tl = json.loads(_req.text)
 
-	if len(_tmp_tl) == 0:
-		break
+    if len(_tmp_tl) == 0:
+        break
 
-	_min_id = _tmp_tl[-1]['id']
-	_my_tl.extend(_tmp_tl)
+    _min_id = _tmp_tl[-1]['id']
+    _my_tl.extend(_tmp_tl)
 
 # extract according to user config
 DATE_FORMAT = _config_file.get('twitter', 'date_format')
@@ -39,24 +39,17 @@ PERIOD = dt.timedelta(days = int(_config_file.get('user', 'period')))
 _period_date = dt.date.today() - PERIOD
 _target_tweet = []
 for tweet in _my_tl:
-	_create_date = dt.datetime.strptime(tweet['created_at'], DATE_FORMAT)
-	_create_date = dt.date(_create_date.year, _create_date.month, _create_date.day)
-	if _create_date < _period_date:
-		_target_tweet.append(tweet)
+    _create_date = dt.datetime.strptime(tweet['created_at'], DATE_FORMAT)
+    _create_date = dt.date(_create_date.year, _create_date.month, _create_date.day)
+    if _create_date < _period_date:
+        _target_tweet.append(tweet)
 
 _destroy_url = 'https://api.twitter.com/1.1/statuses/destroy/:id.json'
 
 # destroy target tweet without likes, media
-_delete_count = 0
 for tweet in _target_tweet:
-	if 'media' not in tweet['entities'] and tweet['favorite_count'] == 0:
-		_destroy_url = 'https://api.twitter.com/1.1/statuses/destroy/' + str(tweet['id']) + '.json'
-		_req = _twitter.post(_destroy_url)
-		print _req.status_code
-		_delete_count += 1
-
-print _delete_count
-
-
-
+    if 'media' not in tweet['entities'] and tweet['favorite_count'] == 0:
+        _destroy_url = 'https://api.twitter.com/1.1/statuses/destroy/' + str(tweet['id']) + '.json'
+        _req = _twitter.post(_destroy_url)
+        print _req.status_code
 
