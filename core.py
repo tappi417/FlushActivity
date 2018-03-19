@@ -46,10 +46,10 @@ for tweet in _my_tl:
 
 _destroy_url = 'https://api.twitter.com/1.1/statuses/destroy/:id.json'
 
-# destroy target tweet without likes, media
+# destroy target tweet without media
 for tweet in _target_tweet:
-    if 'media' not in tweet['entities'] and tweet['favorite_count'] == 0:
+    if 'media' not in tweet['entities']:
         _destroy_url = 'https://api.twitter.com/1.1/statuses/destroy/' + str(tweet['id']) + '.json'
         _req = _twitter.post(_destroy_url)
-        print _req.status_code
+        print 'status: ' + str(_req.status_code)
 
