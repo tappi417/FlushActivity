@@ -23,7 +23,7 @@ _my_tl = json.loads(_req.text)
 # create all my tweeet list
 _min_id = _my_tl[-1]['id']
 while True:
-    _params = {'max_id': _min_id - 1, 'count': 200, 'exclude_replies': True}
+    _params = {'max_id': _min_id - 1, 'count': 200}
     _req = _twitter.get(_url, params = _params)
     _tmp_tl = json.loads(_req.text)
 
