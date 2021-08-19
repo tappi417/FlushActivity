@@ -1,8 +1,8 @@
 # FlushActivity
-- get_my_all_tweets.py
-- get_my_likes.py
-- delete_my_tweets.py
-- delete_my_likes.py
+- get_my_all_tweets.py：自分の全てのツイートを取得
+- get_my_likes.py：likeした全てのツイートを取得
+- delete_my_tweets.py：指定した日付までのツイートを削除
+- delete_my_likes.py：指定した日付までのツイートをunlike
 
 # config.iniの参考設定
 [oauth]  
@@ -20,7 +20,7 @@ month = 3
 day = 1  
 
 # 参考
-https://torusblog.org/visualstudiocode-setpu-10-minuits/  
-https://torusblog.org/vscode-library-install-after/  
-https://degitalization.hatenablog.jp/entry/2021/01/03/201258#Step4---PythonのExtensionを入れておく  
-https://github.com/requests/requests-oauthlib  
+- requests-oauthlib(https://github.com/requests/requests-oauthlib)
+- 【初心者】10分でVSCodeセットアップ〜前編〜(https://torusblog.org/visualstudiocode-setpu-10-minuits/)
+- 【初心者でも解る】VSCodeでライブラリ簡単インストール〜後編〜(https://torusblog.org/vscode-library-install-after/)
+- Python - M1 MacにVisual Studio codeをインストールしてpythonを実行する(https://degitalization.hatenablog.jp/entry/2021/01/03/201258#Step4---PythonのExtensionを入れておく  )
