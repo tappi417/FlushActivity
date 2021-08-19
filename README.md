@@ -1,5 +1,5 @@
 # FlushActivity
-- get_my_all_tweet.py
+- get_my_all_tweets.py
 - get_my_likes.py
 - delete_my_tweets.py
 - delete_my_likes.py
