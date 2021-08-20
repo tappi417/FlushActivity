@@ -1,6 +1,6 @@
 # FlushActivity
-- get_my_all_tweets.py：自分の全てのツイートを取得
-- get_my_likes.py：likeした全てのツイートを取得
+- get_all_tweets.py：自分の全てのツイートを取得
+- get_all_likes.py：likeした全てのツイートを取得
 - delete_my_tweets.py：指定した日付までのツイートを削除
 - delete_my_likes.py：指定した日付までのツイートをunlike
 
