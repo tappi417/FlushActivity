@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import configparser
 import json
 import datetime as dt
@@ -42,20 +41,14 @@ PERIOD_DATE_MONTH = int(_config_file.get('period', 'month'))
 PERIOD_DATE_DAY = int(_config_file.get('period', 'day'))
 _period_date = dt.date(PERIOD_DATE_YEAR, PERIOD_DATE_MONTH, PERIOD_DATE_DAY)
 
-_target_tweet = []
+# delete my tweets created until period date
 for tweet in _my_tl:
     _create_date = dt.datetime.strptime(tweet['created_at'], TWITTER_DATE_FORMAT)
     _create_date = dt.date(_create_date.year, _create_date.month, _create_date.day)
+
     if _create_date < _period_date:
-        _target_tweet.append(tweet)
-
-# destroy target tweet without media
-for tweet in _target_tweet:
-    _destroy_url = 'https://api.twitter.com/1.1/statuses/destroy/' + str(tweet['id']) + '.json'
-    _req = _twitter.post(_destroy_url)
-    
-    _create_date = dt.datetime.strptime(tweet['created_at'], TWITTER_DATE_FORMAT)
-    _create_date = dt.date(_create_date.year, _create_date.month, _create_date.day)
-    print ('status: ' + str(_req.status_code))
-    print (_create_date.strftime('%Y/%m/%d') + ': ' + tweet['text'])
-
+        _destroy_url = 'https://api.twitter.com/1.1/statuses/destroy/' + str(tweet['id']) + '.json'
+        _req = _twitter.post(_destroy_url)
+        
+        print ('status: ' + str(_req.status_code))
+        print (_create_date.strftime('%Y/%m/%d') + ': ' + tweet['text'])
